@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
+# Install pip-tools and compile requirements
 RUN pip install pip-tools
-
 RUN pip-compile requirements.in
 RUN pip-compile requirements-dev.in
 
@@ -16,8 +16,15 @@ RUN pip-compile requirements-dev.in
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir -r requirements-dev.txt
 
-# Expose the port the app runs on
-EXPOSE 8000
+# Copy the run_services.sh script into the container
+COPY bin/run_services.sh /app/bin/run_services.sh
 
-# Command to run the FastAPI app with uvicorn
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Make the run_services.sh script executable
+RUN chmod +x /app/bin/run_services.sh
+
+# Expose the ports the services run on
+EXPOSE 8000
+EXPOSE 4201
+
+# Command to run the run_services.sh script
+CMD ["/app/bin/run_services.sh"]
