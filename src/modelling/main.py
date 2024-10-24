@@ -2,8 +2,10 @@ import argparse
 from pathlib import Path
 from preprocessing import load_data, preprocess_data
 from training import train_and_log_model
+from prefect import task, flow
 
 
+@flow
 def main(trainset_path: Path) -> None:
     """Train a model using the data at the given path and save the model (pickle)."""
     # Read and preprocess data

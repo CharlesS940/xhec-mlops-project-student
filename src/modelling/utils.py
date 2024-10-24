@@ -1,7 +1,9 @@
 import pickle
 from pathlib import Path
+from prefect import task, flow
 
 
+@task
 def pickle_object(obj, filename: str, directory: str = "src/web_service/local_objects"):
     """Pickle a Python object and save it to a file."""
     path = Path(directory)
