@@ -1,0 +1,5 @@
+pre-commit==3.4.0
+black==22.12.0
+black[jupyter]
+pep8-naming==0.13.3
+isort==5.12.0
