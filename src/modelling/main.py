@@ -1,15 +1,14 @@
 import argparse
 from pathlib import Path
-from preprocessing import load_and_preprocess_data
+from preprocessing import load_data, preprocess_data
 from training import train_and_log_model
 
 
 def main(trainset_path: Path) -> None:
     """Train a model using the data at the given path and save the model (pickle)."""
     # Read and preprocess data
-    X_train_scaled, X_test_scaled, y_train, y_test = load_and_preprocess_data(
-        trainset_path
-    )
+    df = load_data(trainset_path)
+    X_train_scaled, X_test_scaled, y_train, y_test = preprocess_data(df)
 
     # Train model and log with MLflow
     train_and_log_model(X_train_scaled, X_test_scaled, y_train, y_test)
