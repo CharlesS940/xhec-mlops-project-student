@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 from preprocessing import load_data, preprocess_data
-from training import train_and_log_model
+from training import train_model
 from prefect import task, flow
 
 
@@ -13,7 +13,7 @@ def main(trainset_path: Path) -> None:
     X_train_scaled, X_test_scaled, y_train, y_test = preprocess_data(df)
 
     # Train model and log with MLflow
-    train_and_log_model(X_train_scaled, X_test_scaled, y_train, y_test)
+    train_model(X_train_scaled, X_test_scaled, y_train, y_test)
 
 
 if __name__ == "__main__":

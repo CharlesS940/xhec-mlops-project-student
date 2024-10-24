@@ -11,7 +11,8 @@ def load_data(file_path):
     return df
 
 
-def preprocess_data(df):
+def preprocess_data(file_path):
+    df = pd.read_csv(file_path)
     # Convert Rings to Age
     df["Age"] = df["Rings"] + 1.5
 

@@ -23,5 +23,4 @@ def train_model(X_train_scaled, X_test_scaled, y_train, y_test):
 
     print(f"MAE: {mae}, R2 Score: {r2}")
 
-    # Pickle the model
-    pickle_object(model, "abalone_age_model")
+    return model
