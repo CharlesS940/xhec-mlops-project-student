@@ -26,11 +26,11 @@ This repository aims to industrialize the [Abalone age prediction](https://www.k
 
 ## Participants
 
-Tess Coullon (tesscln)
-Charles Siret (CharlesS940)
-Gaspard Hassenforder (Gaspard0302)
-Henri Vignial (hvignial)
-Raphaël Amzallag (raphaelamzallag)
+- Tess Coullon (tesscln)
+- Charles Siret (CharlesS940)
+- Gaspard Hassenforder (Gaspard0302)
+- Henri Vignial (hvignial)
+- Raphaël Amzallag (raphaelamzallag)
 
 ## Setting Up the Virtual Environment
 
