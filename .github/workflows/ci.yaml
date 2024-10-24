@@ -26,4 +26,4 @@ jobs:
       - name: Test the quality of your code
         run: |
           # Run linting checks
-          ruff .\
+          ruff ./
