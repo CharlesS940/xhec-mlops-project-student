@@ -1,7 +1,7 @@
 # TODO - complete with requirements (pandas, sklearn etc...)
 # Then, execute "pip-compile requirements.in" to generate the file requirements.txt
 
-pandas
+pandas==2.1.1
 prefect==2.13.7
 loguru==0.7.2
 seaborn==0.12.2
