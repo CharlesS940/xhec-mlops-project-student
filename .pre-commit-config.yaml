@@ -10,17 +10,6 @@ repos:
       - id: check-added-large-files
   - repo: local
     hooks:
-      - id: black
-        name: Formatting (black)
-        entry: black
-        language: python
-        types_or: [python, pyi, jupyter]
-        additional_dependencies: [".[jupyter]"]
-      - id: isort
-        name: Sorting imports (isort)
-        entry: isort
-        types: [python]
-        language: system
       - id: ruff
         name: Linting (ruff)
         entry: ruff
