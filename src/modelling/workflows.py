@@ -19,7 +19,10 @@ def batch_predict_and_retrain_workflow(new_data_path: str):
     # 2. Preprocess the new input data
     X_train_scaled, X_test_scaled, y_train, y_test = preprocess_data(new_data_path)
 
-    X = pd.concat([X_train_scaled, X_test_scaled])
+    X_train_scaled_df = pd.DataFrame(X_train_scaled)
+    X_test_scaled_df = pd.DataFrame(X_test_scaled)
+
+    X = pd.concat([X_train_scaled_df, X_test_scaled_df])
 
     # 3. Predict using the loaded model
     predictions = predict_age(X)
@@ -35,7 +38,7 @@ def batch_predict_and_retrain_workflow(new_data_path: str):
 
     # 5. Retrain the model on the full dataset
     updated_model = train_model(X_train_scaled, X_test_scaled, y_train, y_test)
-
+    print("TRRRRRRRRRRRRRRRRRAINNNNNN     ", updated_model, "ENNNNND")
     # 6. Save the newly trained model
     pickle_object(updated_model, "src/web_service/local_objects/abalone_age_model.pkl")
 
