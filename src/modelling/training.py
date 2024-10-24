@@ -5,7 +5,7 @@ from prefect import task, flow
 
 
 @task
-def train_and_log_model(X_train_scaled, X_test_scaled, y_train, y_test):
+def train_model(X_train_scaled, X_test_scaled, y_train, y_test):
     # Initialize the model
     model = RandomForestRegressor(random_state=42)
 
