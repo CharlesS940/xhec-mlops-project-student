@@ -4,178 +4,82 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10-blue.svg)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![Linting: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-informational?logo=pre-commit&logoColor=white)](https://github.com/artefactory/xhec-mlops-project-student/blob/main/.pre-commit-config.yaml)
+
 </div>
 
-This repository has for purpose to industrialize the [Abalone age prediction](https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset) Kaggle contest.
+## Project Description
 
-<details>
-<summary>Details on the Abalone Dataset</summary>
+This repository aims to industrialize the [Abalone age prediction](https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset) Kaggle contest. The goal is to predict the age of abalone (column "Rings") from physical measurements ("Shell weight", "Diameter", etc.). The project involves creating workflows to train and retrain models, deploying these workflows using Prefect, and providing an API for making predictions on new data.
 
-The age of abalone is determined by cutting the shell through the cone, staining it, and counting the number of rings through a microscope -- a boring and time-consuming task. Other measurements, which are easier to obtain, are used to predict the age.
+## Directory Structure
 
-**Goal**: predict the age of abalone (column "Rings") from physical measurements ("Shell weight", "Diameter", etc...)
+- `src/`: Contains the source code for the project.
+  - `modelling/`: Contains scripts for training and retraining the model.
+  - `api/`: Contains the FastAPI application for making predictions.
+- `data/`: Contains the dataset used for training and predictions.
+- `requirements.txt`: Lists the dependencies required for the project.
+- `requirements-dev.txt`: Lists the development dependencies.
+- `environment.yml`: Conda environment configuration file.
 
-You can download the dataset on the [Kaggle page](https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset)
+## Participants
 
-</details>
+Tess Coullon (tesscln)
+Charles Siret (CharlesS940)
+Gaspard Hassenforder (Gaspard0302)
+Henri Vignial (hvignial)
+Raphaël Amzallag (raphaelamzallag)
 
-## Table of Contents
+## Setting Up the Virtual Environment
 
-- [xhec-mlops-project-student](#xhec-mlops-project-student)
-  - [Table of Contents](#table-of-contents)
-  - [Deliverables and Evaluation](#deliverables-and-evaluation)
-    - [Deliverables](#deliverables)
-    - [Evaluation](#evaluation)
-  - [Steps to reproduce to build the deliverable](#steps-to-reproduce-to-build-the-deliverable)
-    - [Pull requests in this project](#pull-requests-in-this-project)
-    - [Tips to work on this project](#tips-to-work-on-this-project)
+1. Create a virtual environment:
 
-## Deliverables and notation
+    ```bash
+    python -m venv <your_venv_name>
+    ```
 
-### Deliverables
+    If Python 3.10 or 3.11 is not your default version, specify the version:
 
-The deliverable of this project is a copy of this repository with the industrialization of the Abalone age prediction model. We expect to see:
+    ```bash
+    py -3.10 -m venv <your_venv_name>
+    ```
 
-1. a workflow to train a model using Prefect
-- The workflows to train the model and to make the inference (prediction of the age of abalone) are in separate modules and use Prefect `flow` and `task` objects
-- The code to get the trained model and encoder is in a separate module and must be reproducible (not necessarily in a docker container)
-2. a Prefect deployment to retrain the model regularly
-3. an API that runs on a local app and that allows users to make predictions on new data
-  - A working API which can be used to make predictions on new data
-    - The API can run on a docker container
-    - The API has validation on input data (use Pydantic)
+2. Activate the virtual environment and install the requirements:
 
-### Evaluation
+    ```bash
+    <your_venv_name>\Scripts\activate.ps1
+    pip install -r requirements.txt
+    pip install -r requirements-dev.txt
+    ```
 
-Each of your pull requests will be graded based on the following criteria:
+3. Install `pip-tools` to use `pip-compile` for generating [requirements.txt](http://_vscodecontentref_/#%7B%22uri%22%3A%7B%22%24mid%22%3A1%2C%22fsPath%22%3A%22%2FUsers%2Fraphaelamzallag%2Fcode%2Fmasters%2Fhec%2Fmlops%2Fxhec-mlops-project-student%2Frequirements.txt%22%2C%22path%22%3A%22%2FUsers%2Fraphaelamzallag%2Fcode%2Fmasters%2Fhec%2Fmlops%2Fxhec-mlops-project-student%2Frequirements.txt%22%2C%22scheme%22%3A%22file%22%7D%7D):
 
-- **Clarity** and quality of code
-  - good module structure
-  - naming conventions
-  - use of docstrings and type hinting
-- **Formatting**
-  - respect of clear code conventions
+    ```bash
+    pip install pip-tools
+    ```
 
-  *P.S. you can use a linter and automatic code formatters to help you with that*
+## Running the API
 
-- Proper **Functioning** of the code
-  - the code must run without bugs
+1. Navigate to the root directory of the project.
 
-Bseides the evaluation of the pull requests, we will also evaluate:
-- **Reproducibility** and clarity of instructions to run the code (we will actually try to run your code)
-  - Having a clear README.md with
-    - the context of the project
-    - the name of the participants and their github users
-    - the steps to recreate the Python environment
-    - the instructions to run all parts of the code
-- Use of *Pull Requests* (see below) to coordinate your collaboration
+2. Run the FastAPI app with uvicorn:
 
-## Steps to reproduce to build the deliverable
+    ```bash
+    uvicorn src.web_service.main:app --host 0.0.0.0 --port 8000
+    ```
 
-To help you with the structure and order of steps to perform in this project, we created different pull requests templates.
-Each branch in this repository corresponds to a future pull request and has an attached markdown file with the instructions to perform the tasks of the pull request.
-Each branch starts with a number.
-You can follow the order of the branches to build your project and collaborate.
+## Running the API with Docker
 
-> [!NOTE]
-> There are "TODO" in the code of the different branches. Each "TODO" corresponds to a task to perform to build the project.
-> [!IMPORTANT]
-> Remember to remove all code that is not used before the end of the project (including all TODO tags in the code).
+1. Build the Docker image:
 
-**Please follow these steps**:
+    ```bash
+    docker build -t abalone-age-api .
+    ```
 
-- If not done already, create a GitHub account
-- If not done already, create a [Kaggle account](https://www.kaggle.com/account/login?phase=startRegisterTab&returnUrl=%2F) (so you can download the dataset)
-- Fork this repository (one person per group)
+2. Run the Docker container:
 
-**WARNING**: make sure to **unselect** the option "Copy the `master` branch only", so you have all the branches in the forked repository.
-
-- Add the different members of your group as admin to your forked repository
-- Follow the order of the numbered branches and for each branch:
-  - Read the PR_i.md (where i is the number of the branch) file to understand the task to perform
-   > [!NOTE]
-   > Dont forget to integrate your work from past branches (except for when working on branch #1 obviously (!))
-   > ```bash
-   > git checkout branch_number_i
-   > git pull origin master
-   > # At this point, you might have a VIM window opening, you can close it using the command ":wq"
-   > git push
-   > ```
-    - Read and **follow** all the instructions in the the PR instructions file
-    - Do as many commits as necessary on the branch_number_i to perform the task indicated in the corresponding markdown file
-    - Open **A SINGLE** pull request from this branch to the main branch of your forked repository
-    - Once done, merge the pull request in the main branch of your forked repository
-
-### Pull requests in this project
-
-Github [Pull Requests](https://docs.github.com/articles/about-pull-requests) are a way to propose changes to a repository. They have for purpose to integrate the work of *feature branches* into the main branch of the repository, with a collaborative review process.
-
-**PR tips:**
-
-Make sure that you select your own repository when selecting the base repository:
-
-![PR Wrong](assets/PR_wrong.png)
-
-It should rather look like this:
-
-![PR Right](assets/PR_right.png)
-
-### Tips to work on this project
-
-- Use a virtual environment to install the dependencies of the project (conda or virtualenv for instance)
-
-- Once your virtual environment is activated, install pre-commit hooks to automatically format your code before each commit:
-
-```bash
-pip install pre-commit
-pre-commit install
-```
-
-This will guarantee that your code is formatted correctly and of good quality before each commit.
-
-- Use a `requirements.in` file to list the dependencies of your project. You can use the following command to generate a `requirements.txt` file from a `requirements.in` file:
-
-```bash
-pip-compile requirements.in
-```
-
-## Environment setup instructions
-
-You can set up your environment using either conda or venv:
-
-### venv
-
-Create a venv:
-
-```bash
-python -m venv <your_venv_name>
-```
-
-This repo supports python 3.10 and 3.11, if neither of these are your default python versions you can specify the python version for your venv using the python launcher:
-
-```bash
-py -3.10 -m venv <your_venv_name>
-```
-
-Once your venv is set up you can activate it and install the requirements from the .txt files:
-
-```bash
-<your_venv_name>\Scripts\activate.ps1
-pip install -r .\requirements.txt
-pip install -r .\requirements-dev.txt
-```
-
-### conda
-
-In conda you can create and activate the environment using these two commands:
-
-```bash
-conda env create -f environment.yml
-conda activate xhec-mlops-abalone
-```
-
-Finally, for both venv and conda, remember to choose your python interpreter to be the environment you have just created. You can use the shortcut Ctrl+Shift+p and click "Select Interpreter" then choose the appropriate interpreter.
+    ```bash
+    docker run -p 8000:8000 -p 4201:4201 abalone-age-prediction   
+    ```
