@@ -26,4 +26,4 @@ packages = ["src"]
 [tool.ruff]
 line-length = 88
 exclude = ["migrations"]
-select = ["E", "F", "I"]
+lint.select = ["E", "F", "I"]

@@ -2,8 +2,10 @@ import pickle
 
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+from prefect import task, flow
 
 
+@task
 def load_model(model_path: str = "src/web_service/local_objects/abalone_age_model.pkl"):
     """Load the pickled model."""
     with open(model_path, "rb") as file:
@@ -53,6 +55,7 @@ def prepare_input(
     return data[feature_names].values
 
 
+@task
 def predict_age(features):
     """
     Predict abalone age using the trained model.

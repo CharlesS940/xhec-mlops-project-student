@@ -1,12 +1,18 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
+from prefect import task, flow
 
 
-def load_and_preprocess_data(file_path):
+def load_data(file_path):
     # Load dataset
     df = pd.read_csv(file_path)
 
+    return df
+
+
+def preprocess_data(file_path):
+    df = pd.read_csv(file_path)
     # Convert Rings to Age
     df["Age"] = df["Rings"] + 1.5
 
