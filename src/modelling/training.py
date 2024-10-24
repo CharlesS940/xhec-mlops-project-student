@@ -5,8 +5,9 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, r2_score
 from utils import pickle_object
 
+
 def train_and_log_model(X_train_scaled, X_test_scaled, y_train, y_test):
-  # Initialize the model
+    # Initialize the model
     model = RandomForestRegressor(random_state=42)
 
     # Train the model
@@ -18,7 +19,6 @@ def train_and_log_model(X_train_scaled, X_test_scaled, y_train, y_test):
     # Evaluate the model
     mae = mean_absolute_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
-
 
     # Infer the model signature
     signature = infer_signature(X_train_scaled, model.predict(X_train_scaled))
