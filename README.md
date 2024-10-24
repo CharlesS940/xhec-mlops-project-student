@@ -141,3 +141,40 @@ This will guarantee that your code is formatted correctly and of good quality be
 ```bash
 pip-compile requirements.in
 ```
+
+## Environment setup instructions
+
+You can set up your environment using either conda or venv:
+
+### venv
+
+Create a venv:
+
+```bash
+python -m venv <your_venv_name>
+```
+
+This repo supports python 3.10 and 3.11, if neither of these are your default python versions you can specify the python version for your venv using the python launcher:
+
+```bash
+py -3.10 -m venv <your_venv_name>
+```
+
+Once your venv is set up you can activate it and install the requirements from the .txt files:
+
+```bash
+<your_venv_name>\Scripts\activate.ps1
+pip install -r .\requirements.txt
+pip install -r .\requirements-dev.txt
+```
+
+### conda
+
+In conda you can create and activate the environment using these two commands:
+
+```bash
+conda env create -f environment.yml
+conda activate xhec-mlops-abalone
+```
+
+Finally, for both venv and conda, remember to choose your python interpreter to be the environment you have just created. You can use the shortcut Ctrl+Shift+p and click "Select Interpreter" then choose the appropriate interpreter.
